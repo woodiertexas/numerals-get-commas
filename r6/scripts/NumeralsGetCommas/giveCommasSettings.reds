@@ -21,8 +21,8 @@ public class UserSettings {
     public let delineationFormat: CommaDelineationFormat = CommaDelineationFormat.Commas;
 
     @runtimeProperty("ModSettings.mod", "Numerals Get Commas")
-    @runtimeProperty("ModSettings.displayName", "Display Cents")
-    @runtimeProperty("ModSettings.description", "Whether or not cents should be displayed on money values.")
+    @runtimeProperty("ModSettings.displayName", "Display Cents on Money Values")
+    @runtimeProperty("ModSettings.description", "Whether or not cents should be displayed on some money values.")
     public let shouldDisplayCents: Bool = false;
 
     @runtimeProperty("ModSettings.mod", "Numerals Get Commas")
