@@ -3,7 +3,7 @@ module NumeralsGetCommas.Functions
 import NumeralsGetCommas.Settings.*
 
 private func SetDelineationFormat() -> String {
-    let settings = UserSettings.Get();
+    let settings = UserSettingsSS.GetSS();
     let chosenFormat: String;
 
     switch(settings.delineationFormat) {
@@ -22,8 +22,7 @@ private func SetDelineationFormat() -> String {
 }
 
 public func AddCents() -> String {
-    let settings = UserSettings.Get();
-
+    let settings = UserSettingsSS.GetSS();
     if (!settings.shouldDisplayCents) {
         return "";
     }

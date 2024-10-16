@@ -67,6 +67,11 @@ protected func UpdateQuantity() -> Void {
 private final func SetRosterSlotData() -> Void {
     wrappedMethod();
 
+    let settings = UserSettingsSS.GetSS();
+    if (!settings.shouldCommaDelineateAmmoCounter) {
+        return;
+    }
+
     let weaponTotalAmmo: Int32 = RPGManager.GetAmmoCountValue(this.m_player, this.m_activeWeapon.weaponID) - this.m_activeWeapon.ammoCurrent;
     if (this.m_activeWeapon.ammoCurrent > 999) {
         inkTextRef.SetText(this.m_weaponCurrentAmmo, CommaDelineateString(this.GetAmmoText(this.m_activeWeapon.ammoCurrent, 3)));
@@ -81,6 +86,11 @@ private final func SetRosterSlotData() -> Void {
 @wrapMethod(AccumulatedDamageDigitLogicController)
 public final func Show(const damageInfo: script_ref<DamageInfo>, showingBothDigits: Bool, oneInstance: Bool, forceStickToTarget: Bool) -> Void {
     wrappedMethod(damageInfo, showingBothDigits, oneInstance, forceStickToTarget);
+
+    let settings = UserSettingsSS.GetSS();
+    if (!settings.shouldCommaDelineateDamageNumbers) {
+        return;
+    }
 
     let damageValue: Int32 = Cast<Int32>(this.m_damageAccumulated);
     this.m_textWidget.SetText(CommaDelineateInt32(damageValue)); 
