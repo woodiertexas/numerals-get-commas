@@ -1,6 +1,6 @@
 module NumeralsGetCommas.Settings
 
-//@if(ModuleExists("ModSettingsModule"))
+@if(ModuleExists("ModSettingsModule"))
 import ModSettingsModule.*
 
 public enum CommaDelineationFormat {
@@ -49,8 +49,8 @@ public class UserSettingsSS extends ScriptableSystem {
     @runtimeProperty("ModSettings.description", "COMMAS_Settings_CentsNumberCommaFormatDescription")
     @runtimeProperty("ModSettings.displayValues.Periods", "COMMAS_Settings_Periods")
     @runtimeProperty("ModSettings.displayValues.Commas", "COMMAS_Settings_Commas")
-    @runtimeProperty("ModSettings.dependency", "modEnabled")
     @runtimeProperty("ModSettings.dependency", "shouldDisplayCents")
+    @runtimeProperty("ModSettings.dependency", "modEnabled")
     public let centsDelineationFormat: CentsCommaDelineationFormat = CentsCommaDelineationFormat.Periods;
 
     // Options for giving commas to various UI elements.
@@ -60,7 +60,7 @@ public class UserSettingsSS extends ScriptableSystem {
     @runtimeProperty("ModSettings.displayName", "COMMAS_Settings_AmmoCounterCommaFormatName")
     @runtimeProperty("ModSettings.description", "COMMAS_Settings_AmmoCounterCommaFormatDescription")
     @runtimeProperty("ModSettings.dependency", "modEnabled")
-    public let shouldCommaDelineateAmmoCounter: Bool = false;
+    public let shouldCommaDelineateAmmoCounter: Bool = true;
 
     @runtimeProperty("ModSettings.mod", "COMMAS_Settings_ModTitle")
     @runtimeProperty("ModSettings.category", "COMMAS_Settings_UiOptions")
@@ -68,18 +68,26 @@ public class UserSettingsSS extends ScriptableSystem {
     @runtimeProperty("ModSettings.displayName", "COMMAS_Settings_DamageNumbersCommaFormatName")
     @runtimeProperty("ModSettings.description", "COMMAS_Settings_DamageNumbersCommaFormatDescription")
     @runtimeProperty("ModSettings.dependency", "modEnabled")
-    public let shouldCommaDelineateDamageNumbers: Bool = false;
+    public let shouldCommaDelineateDamageNumbers: Bool = true;
+
+    @runtimeProperty("ModSettings.mod", "COMMAS_Settings_ModTitle")
+    @runtimeProperty("ModSettings.category", "COMMAS_Settings_UiOptions")
+    @runtimeProperty("ModSettings.category.order", "2")
+    @runtimeProperty("ModSettings.displayName", "COMMAS_Settings_LootItemQuantitiesCommaFormatName")
+    @runtimeProperty("ModSettings.description", "COMMAS_Settings_DamageNumbersCommaFormatDescription")
+    @runtimeProperty("ModSettings.dependency", "modEnabled")
+    public let shouldCommaDelineateLootItemQuantities: Bool = true;
 
 	public static func GetSS() -> ref<UserSettingsSS> {
-		return GameInstance.GetScriptableSystemsContainer(GetGameInstance()).Get(n"NumeralsGetCommas.UserSettingsSS") as UserSettingsSS;
+		return GameInstance.GetScriptableSystemsContainer(GetGameInstance()).Get(n"NumeralsGetCommas.Settings.UserSettingsSS") as UserSettingsSS;
 	}
 
-	//@if(ModuleExists("ModSettingsModule"))
+	@if(ModuleExists("ModSettingsModule"))
 	private func OnAttach() -> Void {
 		ModSettings.RegisterListenerToClass(this);
 	}
 
-	//@if(ModuleExists("ModSettingsModule"))
+	@if(ModuleExists("ModSettingsModule"))
 	private func OnDetach() -> Void {
 		ModSettings.UnregisterListenerToClass(this);
 	}

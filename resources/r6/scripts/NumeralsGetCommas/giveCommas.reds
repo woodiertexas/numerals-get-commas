@@ -58,7 +58,10 @@ protected cb func OnMainAnimationOver(e: ref<inkAnimProxy>) -> Bool {
 protected func UpdateQuantity() -> Void {
     wrappedMethod();
 
-    let quantityText: String = this.m_lootingData.quantity > 9999 ? CommaDelineateString("9999+") : IntToString(this.m_lootingData.quantity);
+    let settings = UserSettingsSS.GetSS();
+    if (!settings.shouldCommaDelineateLootItemQuantities) { return; }
+
+    let quantityText: String = this.m_lootingData.quantity > 9999 ? CommaDelineateString("9999") + "+" : IntToString(this.m_lootingData.quantity);
     inkTextRef.SetText(this.m_itemQuantity, CommaDelineateString(quantityText));
 }
 
@@ -68,9 +71,7 @@ private final func SetRosterSlotData() -> Void {
     wrappedMethod();
 
     let settings = UserSettingsSS.GetSS();
-    if (!settings.shouldCommaDelineateAmmoCounter) {
-        return;
-    }
+    if (!settings.shouldCommaDelineateAmmoCounter) { return; }
 
     let weaponTotalAmmo: Int32 = RPGManager.GetAmmoCountValue(this.m_player, this.m_activeWeapon.weaponID) - this.m_activeWeapon.ammoCurrent;
     if (this.m_activeWeapon.ammoCurrent > 999) {
@@ -88,9 +89,7 @@ public final func Show(const damageInfo: script_ref<DamageInfo>, showingBothDigi
     wrappedMethod(damageInfo, showingBothDigits, oneInstance, forceStickToTarget);
 
     let settings = UserSettingsSS.GetSS();
-    if (!settings.shouldCommaDelineateDamageNumbers) {
-        return;
-    }
+    if (!settings.shouldCommaDelineateDamageNumbers) { return; }
 
     let damageValue: Int32 = Cast<Int32>(this.m_damageAccumulated);
     this.m_textWidget.SetText(CommaDelineateInt32(damageValue)); 

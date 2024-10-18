@@ -23,9 +23,7 @@ private func SetDelineationFormat() -> String {
 
 public func AddCents() -> String {
     let settings = UserSettingsSS.GetSS();
-    if (!settings.shouldDisplayCents) {
-        return "";
-    }
+    if (!settings.shouldDisplayCents) { return ""; }
 
     let chosenFormat: String;
     switch(settings.centsDelineationFormat) {
@@ -42,6 +40,9 @@ public func AddCents() -> String {
 
 // Adapted from Demon9ne's comma formatting code
 public static func CommaDelineateString(text: String) -> String {
+    let settings = UserSettingsSS.GetSS();
+    if (!settings.modEnabled) { return text; }
+
     let isNegative: Bool = StrContains(text, "-");
     if isNegative {
         text = StrReplace(text, "-", "");
