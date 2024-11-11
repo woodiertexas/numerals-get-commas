@@ -61,8 +61,13 @@ protected func UpdateQuantity() -> Void {
     let settings = UserSettingsSS.GetSS();
     if (!settings.shouldCommaDelineateLootItemQuantities) { return; }
 
-    let quantityText: String = this.m_lootingData.quantity > 9999 ? CommaDelineateString("9999") + "+" : IntToString(this.m_lootingData.quantity);
-    inkTextRef.SetText(this.m_itemQuantity, CommaDelineateString(quantityText));
+    let quantityText: Int32 = this.m_lootingData.quantity;
+
+    if (quantityText > 9999) {
+        inkTextRef.SetText(this.m_itemQuantity, CommaDelineateString("9999") + "+");
+    } else {
+        inkTextRef.SetText(this.m_itemQuantity, CommaDelineateInt32(quantityText));
+    }
 }
 
 // The ammo counters shown in the lower right portion of the screen
