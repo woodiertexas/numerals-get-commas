@@ -99,3 +99,27 @@ public final func Show(const damageInfo: script_ref<DamageInfo>, showingBothDigi
     let damageValue: Int32 = Cast<Int32>(this.m_damageAccumulated);
     this.m_textWidget.SetText(CommaDelineateInt32(damageValue)); 
 }
+
+// Item tooltips
+@wrapMethod(NewItemTooltipBottomModule)
+public final func NEW_Update(data: wref<UIInventoryItem>, player: wref<PlayerPuppet>, m_overridePrice: Int32) -> Void {
+    wrappedMethod(data, player, m_overridePrice);
+
+    if m_overridePrice >= 0 {
+        inkTextRef.SetText(this.m_priceText, CommaDelineateInt32(m_overridePrice));
+    } else {
+        if Equals(this.m_itemDisplayContext, ItemDisplayContext.Vendor) {
+            inkTextRef.SetText(this.m_priceText, CommaDelineateInt32(RoundF(data.GetBuyPrice()) * data.GetQuantity()));
+        } else {
+            inkTextRef.SetText(this.m_priceText, CommaDelineateInt32(RoundF(data.GetSellPrice()) * data.GetQuantity()));
+        };
+    };
+}
+
+@wrapMethod(ItemTooltipBottomModule)
+private final func UpdatePriceVisibility(data: wref<UIInventoryItem>, overridePrice: Int32) -> Void {
+    wrappedMethod(data, overridePrice);
+
+    let price: String = this.m_priceText.GetText();
+    inkTextRef.SetText(this.m_priceText, CommaDelineateString(price));
+}
