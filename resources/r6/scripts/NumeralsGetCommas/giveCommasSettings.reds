@@ -74,7 +74,7 @@ public class UserSettingsSS extends ScriptableSystem {
     @runtimeProperty("ModSettings.category", "COMMAS_Settings_UiOptions")
     @runtimeProperty("ModSettings.category.order", "2")
     @runtimeProperty("ModSettings.displayName", "COMMAS_Settings_LootItemQuantitiesCommaFormatName")
-    @runtimeProperty("ModSettings.description", "COMMAS_Settings_DamageNumbersCommaFormatDescription")
+    @runtimeProperty("ModSettings.description", "COMMAS_Settings_LootItemQuantitiesCommaFormatDescription")
     @runtimeProperty("ModSettings.dependency", "modEnabled")
     public let shouldCommaDelineateLootItemQuantities: Bool = true;
 

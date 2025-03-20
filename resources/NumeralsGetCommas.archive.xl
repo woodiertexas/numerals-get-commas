@@ -1,3 +1,4 @@
 localization:
   onscreens:
     en-us: numeralsgetcommas\localization\en-us.json
+    ru-ru: numeralsgetcommas\localization\ru-ru.json
