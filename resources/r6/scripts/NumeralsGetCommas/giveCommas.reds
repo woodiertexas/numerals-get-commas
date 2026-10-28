@@ -70,9 +70,6 @@ protected func UpdateQuantity() -> Void {
     }
 }
 
-/*
-Disabled for now due to Cyberpunk 2077 patch 2.5
-
 // The ammo counters shown in the lower right portion of the screen
 @wrapMethod(WeaponRosterGameController)
 private final func SetRosterSlotData() -> Void {
@@ -81,16 +78,26 @@ private final func SetRosterSlotData() -> Void {
     let settings = UserSettingsSS.GetSS();
     if (!settings.shouldCommaDelineateAmmoCounter) { return; }
 
-    let weaponTotalAmmo: Int32 = RPGManager.GetAmmoCountValue(this.m_player, this.m_activeWeapon.weaponID) - this.m_activeWeapon.ammoCurrent;
-    if (this.m_activeWeapon.ammoCurrent > 999) {
-        inkTextRef.SetText(this.m_weaponCurrentAmmo, CommaDelineateString(this.GetAmmoText(this.m_activeWeapon.ammoCurrent, 3)));
+    // Right (main) weapon
+    let rightTotalAmmo: Int32 = RPGManager.GetAmmoCountValue(this.m_player, this.m_activeRightWeapon.weaponID) - this.m_activeRightWeapon.ammoCurrent;
+    if (this.m_activeRightWeapon.ammoCurrent > 999) {
+        inkTextRef.SetText(this.m_rightWeaponCurrentAmmo, CommaDelineateString(this.GetAmmoText(this.m_activeRightWeapon.ammoCurrent, 3)));
+    }
+    if (rightTotalAmmo > 999) {
+        inkTextRef.SetText(this.m_rightWeaponTotalAmmo, CommaDelineateString(this.GetAmmoText(rightTotalAmmo, 4)));
     }
 
-    if (weaponTotalAmmo > 999) {
-        inkTextRef.SetText(this.m_weaponTotalAmmo, CommaDelineateString(this.GetAmmoText(weaponTotalAmmo, 4)));
+    // Left weapon, only when it is shown
+    if (this.m_isLeftWeaponVisible) {
+        let leftTotalAmmo: Int32 = RPGManager.GetAmmoCountValue(this.m_player, this.m_activeLeftWeapon.weaponID) - this.m_activeLeftWeapon.ammoCurrent;
+        if (this.m_activeLeftWeapon.ammoCurrent > 999) {
+            inkTextRef.SetText(this.m_leftWeaponCurrentAmmo, CommaDelineateString(this.GetAmmoText(this.m_activeLeftWeapon.ammoCurrent, 3)));
+        }
+        if (leftTotalAmmo > 999) {
+            inkTextRef.SetText(this.m_leftWeaponTotalAmmo, CommaDelineateString(this.GetAmmoText(leftTotalAmmo, 4)));
+        }
     }
 }
-*/
 
 // Damage numbers
 @wrapMethod(AccumulatedDamageDigitLogicController)
